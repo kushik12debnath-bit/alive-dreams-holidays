@@ -2,3 +2,4 @@ server.js
 .server.pid
 node_modules
 scripts/
+.env*
