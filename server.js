@@ -1,6 +1,6 @@
-// Minimal static server for the Elsewhere demo — no dependencies.
-// Start:  node server.js   (from the elsewhere-travel-app folder)
-// Stop:   kill $(cat .server.pid)   or   taskkill //PID <pid> //F
+// Minimal static server for the Alive Dreams Holidays site — no dependencies.
+// Start: node server.js
+// Stop:  taskkill /PID <pid> /F  (pid is also written to .server.pid)
 "use strict";
 const http = require("http");
 const fs = require("fs");
@@ -16,21 +16,58 @@ const mime = {
   ".svg": "image/svg+xml",
   ".png": "image/png",
   ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
+  ".avif": "image/avif",
   ".ico": "image/x-icon",
   ".json": "application/json",
+  ".xml": "application/xml; charset=utf-8",
+  ".txt": "text/plain; charset=utf-8",
 };
+
+function resolveFile(urlPath) {
+  const clean = path.normalize(path.join(root, urlPath));
+  if (!clean.startsWith(root + path.sep) && clean !== root) return null;
+
+  const candidates = [];
+  if (urlPath.endsWith("/") || urlPath === "") {
+    candidates.push(path.join(clean, "index.html"));
+  } else {
+    candidates.push(clean);
+    if (!path.extname(clean)) {
+      candidates.push(clean + ".html");
+      candidates.push(path.join(clean, "index.html"));
+    }
+  }
+  for (const file of candidates) {
+    try {
+      if (fs.statSync(file).isFile()) return file;
+    } catch {
+      /* try next */
+    }
+  }
+  return null;
+}
 
 function start(port) {
   const server = http.createServer((req, res) => {
-    const urlPath = decodeURIComponent(new URL(req.url, "http://localhost").pathname);
-    let filePath = path.normalize(path.join(root, urlPath));
-    if (!filePath.startsWith(root)) {
-      res.writeHead(403);
-      return res.end("Forbidden");
+    let urlPath;
+    try {
+      urlPath = decodeURIComponent(new URL(req.url, "http://localhost").pathname);
+    } catch {
+      res.writeHead(400, { "Content-Type": "text/plain; charset=utf-8" });
+      return res.end("Bad request");
     }
-    if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
-      filePath = path.join(filePath, "index.html");
+
+    const filePath = resolveFile(urlPath);
+    if (!filePath) {
+      const notFound = path.join(root, "404.html");
+      res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
+      return fs.existsSync(notFound)
+        ? res.end(fs.readFileSync(notFound))
+        : res.end("Not found");
     }
+
     fs.readFile(filePath, (err, data) => {
       if (err) {
         res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
@@ -38,6 +75,7 @@ function start(port) {
       }
       res.writeHead(200, {
         "Content-Type": mime[path.extname(filePath).toLowerCase()] || "application/octet-stream",
+        "Cache-Control": "no-cache",
       });
       res.end(data);
     });
