@@ -254,6 +254,64 @@
     toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 4200);
   }
 
+  /* ---------- Holiday search + WhatsApp handoff ---------- */
+  var hsForm = $("[data-holiday-search]");
+  if (hsForm) {
+    var hsTabs = $$("[data-holiday-tab]", hsForm);
+    var hsTheme = $("[name='theme']", hsForm);
+    var hsDest = $("[data-dest-select]", hsForm);
+    var hsDestOptions = hsDest ? $$("option[data-cat]", hsDest) : [];
+
+    function hsSelectTab(tab) {
+      hsTabs.forEach(function (t) {
+        var active = t === tab;
+        t.setAttribute("aria-selected", String(active));
+        t.tabIndex = active ? 0 : -1;
+      });
+      var scope = tab.getAttribute("data-scope") || "all";
+      if (hsTheme) hsTheme.value = tab.textContent.trim();
+      hsDestOptions.forEach(function (option) {
+        var show = scope === "all" || scope === "honeymoon" || scope === "group" || option.getAttribute("data-cat") === scope;
+        option.hidden = !show;
+        option.disabled = !show;
+      });
+      if (hsDest && hsDest.selectedOptions.length && hsDest.selectedOptions[0].disabled) hsDest.value = "";
+    }
+
+    hsTabs.forEach(function (tab, index) {
+      tab.addEventListener("click", function () { hsSelectTab(tab); });
+      tab.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        e.preventDefault();
+        var next = (index + (e.key === "ArrowRight" ? 1 : -1) + hsTabs.length) % hsTabs.length;
+        hsTabs[next].focus();
+        hsSelectTab(hsTabs[next]);
+      });
+    });
+
+    hsForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var data = new FormData(hsForm);
+      var lines = ["Hello Alive Dreams Holidays, I'd like help planning a holiday."];
+      var labels = {
+        theme: "Holiday type",
+        destination: "Destination",
+        type: "Trip style",
+        duration: "Duration",
+        travellers: "Travellers"
+      };
+      Object.keys(labels).forEach(function (key) {
+        var value = (data.get(key) || "").toString().trim();
+        if (value) lines.push(labels[key] + ": " + value);
+      });
+      var url = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(lines.join("\n"));
+      window.open(url, "_blank", "noopener");
+      var status = $(".hs-status", hsForm);
+      if (status) status.textContent = "Opening WhatsApp with your holiday details.";
+      toast("Opening WhatsApp with your holiday details…");
+    });
+  }
+
   /* ---------- Form validation + WhatsApp handoff ---------- */
   function fieldWrap(input) { return input.closest(".field"); }
   function setInvalid(input, invalid) {

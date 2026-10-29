@@ -116,6 +116,19 @@ const TRIPS = [
 const DOMESTIC = TRIPS.filter((t) => t.cat === "domestic");
 const INTERNATIONAL = TRIPS.filter((t) => t.cat === "international");
 
+const SEARCH_DESTS = TRIPS.reduce((acc, t) => {
+  if (!acc.some((item) => item.title === t.cardTitle)) acc.push({ title: t.cardTitle, cat: t.cat });
+  return acc;
+}, []);
+const SEARCH_TYPES = [...new Set(TRIPS.map((t) => t.type))];
+const SEARCH_TABS = [
+  ["all", "All Holidays"],
+  ["domestic", "Domestic"],
+  ["international", "International"],
+  ["honeymoon", "Honeymoon"],
+  ["group", "Group Tours"],
+];
+
 /* ---------- helpers ---------- */
 function esc(s) {
   return String(s)
@@ -308,7 +321,7 @@ function shell({ title, description, canonical, current, content, schema, image,
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0B0C10">
+  <meta name="theme-color" content="#D60F0F">
   <title>${esc(fullTitle)}</title>
   <meta name="description" content="${esc(description)}">
   ${robots ? `<meta name="robots" content="${robots}">` : ""}
@@ -327,9 +340,10 @@ function shell({ title, description, canonical, current, content, schema, image,
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/pages.css">
+  <link rel="stylesheet" href="/assets/css/yatra.css">
   <script src="/assets/js/site.js" defer></script>
   ${schema ? `<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>` : ""}
 </head>
@@ -525,6 +539,56 @@ const CTA = (heading, text, image) => `<section class="cta-wrap">
   </div>
 </section>`;
 
+function holidaySearch() {
+  return `<form class="holiday-search" data-holiday-search action="/booknow" method="get">
+    <div class="hs-tabs" role="tablist" aria-label="Choose a holiday type">
+      ${SEARCH_TABS.map(([scope, label], i) => `<button class="hs-tab" type="button" role="tab" aria-selected="${i === 0}" aria-controls="holiday-search-fields" tabindex="${i === 0 ? 0 : -1}" data-holiday-tab data-scope="${scope}">${label}</button>`).join("")}
+    </div>
+    <input type="hidden" name="theme" value="All Holidays">
+    <div class="hs-fields" id="holiday-search-fields" role="tabpanel" aria-label="Holiday details">
+      <label class="hs-field">
+        <span class="hs-label">${icon("pin")} Destination</span>
+        <select name="destination" data-dest-select>
+          <option value="">Anywhere</option>
+          ${SEARCH_DESTS.map((d) => `<option value="${esc(d.title)}" data-cat="${d.cat}">${esc(d.title)}</option>`).join("")}
+        </select>
+      </label>
+      <label class="hs-field">
+        <span class="hs-label">${icon("compass")} Trip type</span>
+        <select name="type">
+          <option value="">Any style</option>
+          ${SEARCH_TYPES.map((t) => `<option value="${esc(t)}">${esc(t)}</option>`).join("")}
+        </select>
+      </label>
+      <label class="hs-field">
+        <span class="hs-label">${icon("clock")} Duration</span>
+        <select name="duration">
+          <option value="">Any duration</option>
+          <option>3–4 nights</option>
+          <option>5–6 nights</option>
+          <option>7–9 nights</option>
+          <option>10+ nights</option>
+        </select>
+      </label>
+      <label class="hs-field">
+        <span class="hs-label">${icon("users")} Travellers</span>
+        <select name="travellers">
+          <option>1 traveller</option>
+          <option selected>2 travellers</option>
+          <option>3–5 travellers</option>
+          <option>6–10 travellers</option>
+          <option>10+ travellers</option>
+        </select>
+      </label>
+      <button class="btn btn-primary hs-submit" type="submit">${icon("search")} Plan My Holiday</button>
+    </div>
+    <div class="hs-foot">
+      <p class="hs-note">${icon("check")} No payment now. We reply on WhatsApp with a tailored itinerary and quote.</p>
+      <p class="hs-status" aria-live="polite"></p>
+    </div>
+  </form>`;
+}
+
 /* ---------- pages ---------- */
 function homePage() {
   const domesticCards = DOMESTIC.map((t) => tripCard(t)).join("\n");
@@ -538,17 +602,14 @@ function homePage() {
     "vietnam-hanoi-ho-chi-minh",
   ].map((slug) => TRIPS.find((t) => t.slug === slug));
   const content = `
-  <section class="hero" id="top">
+  <section class="hero yatra-hero" id="top">
     <div class="hero-media"><img src="/assets/img/hero-alive.webp" alt="Kedarnath temple with snow-capped Himalayas behind" fetchpriority="high" width="640" height="427"></div>
     <div class="hero-glow"></div><div class="hero-grid"></div>
     <div class="container hero-inner">
       <span class="pill"><span class="dot"></span>Kolkata-based travel house · India &amp; worldwide</span>
       <h1>Travel <span class="grad">Beyond Imagination</span></h1>
-      <p class="hero-sub">Your dream holiday starts here. We craft personalised tours across India and beyond — from the majestic Himalayas and vibrant Northeast to sun-soaked international destinations.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary btn-lg" href="/booknow">Plan My Trip ${icon("arrow")}</a>
-        <a class="btn btn-ghost btn-lg" href="/domestic">Explore Destinations</a>
-      </div>
+      <p class="hero-sub">Personalised domestic and international holidays, planned end to end by a team that knows the road — from Himalayan escapes to Southeast Asian beach breaks.</p>
+      ${holidaySearch()}
       <div class="hero-proof">
         <span><strong>26K+</strong> tours completed</span><span class="sep"></span>
         <span><strong>60+</strong> destinations curated</span><span class="sep"></span>
@@ -779,13 +840,13 @@ function aboutPage() {
   <section class="section" style="padding-top:0">
     <div class="container cards-2">
       <article class="detail-card" data-reveal>
-        <span class="ic" style="display:grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid rgba(96,165,250,.26);background:rgba(37,99,235,.16);color:#93C5FD">${icon("compass")}</span>
+        <span class="ic" style="display:grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid #ffd1d1;background:#fff0f0;color:#d60f0f">${icon("compass")}</span>
         <h2 style="margin-top:16px">Our Mission</h2>
         <p>Our mission at ALIVE Dreams Holidays is simple: to bring your travel dreams to life. We do this by combining deep destination knowledge with a genuine passion for exploration — designing each trip around what matters most to you.</p>
         <p>From the rolling meadows of Northeast India and the royal forts of Rajasthan, to the golden beaches of Southeast Asia and the vibrant streets of Singapore, we handle every detail so you can focus on what travel is truly about — discovery, connection, and joy.</p>
       </article>
       <article class="detail-card" data-reveal>
-        <span class="ic" style="display:grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid rgba(96,165,250,.26);background:rgba(37,99,235,.16);color:#93C5FD">${icon("globe")}</span>
+        <span class="ic" style="display:grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid #ffd1d1;background:#fff0f0;color:#d60f0f">${icon("globe")}</span>
         <h2 style="margin-top:16px">Our Vision</h2>
         <p>At ALIVE Dreams Holidays, we envision a world where every person has the opportunity to explore, experience, and be transformed by travel. We aspire to be the first name that comes to mind when someone in Eastern India — and beyond — dreams of a getaway.</p>
         <p>Whether it's a solo adventure to the Himalayas, a family holiday in Southeast Asia, or a large-scale corporate incentive event, we see ourselves as the trusted architects of those experiences. Our vision is to continuously raise the bar for personalised travel — combining local expertise, global reach, and heartfelt service to create journeys that go far beyond a simple itinerary.</p>
@@ -1219,7 +1280,7 @@ function contactPage() {
       <div>
         <span class="eyebrow">Reach Us</span>
         <h2 style="margin-top:16px;font-size:clamp(1.8rem,3vw,2.4rem)">By phone, WhatsApp, or email.</h2>
-        <p style="margin-top:12px;font-size:.94rem;color:#94A3B8;max-width:46ch">Call, message, or write — we'll take it from there.</p>
+        <p style="margin-top:12px;font-size:.94rem;color:#666;max-width:46ch">Call, message, or write — we'll take it from there.</p>
         <div class="contact-cards" style="margin-top:24px">
           <a class="contact-card" href="${PHONE_LINK}">
             <span class="ic">${icon("phone")}</span>
@@ -1365,10 +1426,10 @@ function bookPage() {
         <div class="detail-card" style="margin-top:16px">
           <span class="eyebrow">What Happens Next</span>
           <ul class="include-list" style="margin-top:14px">
-            <li>${icon("check")}<span><strong style="color:#fff">Discover.</strong> We listen to your dates, budget, and travel style.</span></li>
-            <li>${icon("check")}<span><strong style="color:#fff">Draft.</strong> We turn your brief into a route, stays, and a clear quote.</span></li>
-            <li>${icon("check")}<span><strong style="color:#fff">Confirm.</strong> We refine, then lock flights, rooms and transfers.</span></li>
-            <li>${icon("check")}<span><strong style="color:#fff">Travel.</strong> On-trip checklists and 24x7 support.</span></li>
+            <li>${icon("check")}<span><strong>Discover.</strong> We listen to your dates, budget, and travel style.</span></li>
+            <li>${icon("check")}<span><strong>Draft.</strong> We turn your brief into a route, stays, and a clear quote.</span></li>
+            <li>${icon("check")}<span><strong>Confirm.</strong> We refine, then lock flights, rooms and transfers.</span></li>
+            <li>${icon("check")}<span><strong>Travel.</strong> On-trip checklists and 24x7 support.</span></li>
           </ul>
         </div>
       </div>
@@ -1513,7 +1574,7 @@ function tripPage(t) {
         </div>
         <p>${isIntl ? "Ex-Kolkata (CCU). Flight cost and GST extra." : "Prices may vary. Contact us for exact quotes."}</p>
         <ul class="aside-list">
-          <li>${icon("clock")}<span><strong style="color:#fff">${t.duration}</strong> · ${departure}</span></li>
+          <li>${icon("clock")}<span><strong>${t.duration}</strong> · ${departure}</span></li>
           <li>${icon("tag")}<span>${t.type} · ${t.kicker}</span></li>
           <li>${icon("star")}<span>Rated ${t.rating} by travellers</span></li>
         </ul>

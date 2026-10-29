@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0B0C10">
+  <meta name="theme-color" content="#D60F0F">
   <title>Alive Dreams Holidays — Travel Beyond Imagination</title>
   <meta name="description" content="Kolkata-based tours and travel company crafting personalised domestic and international holidays. Himalayas, Northeast, Thailand, Singapore, Vietnam and more.">
   
@@ -22,9 +22,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/pages.css">
+  <link rel="stylesheet" href="/assets/css/yatra.css">
   <script src="/assets/js/site.js" defer></script>
   <script type="application/ld+json">
 {
@@ -151,17 +152,60 @@
 </div>
   <main id="main">
 
-  <section class="hero" id="top">
+  <section class="hero yatra-hero" id="top">
     <div class="hero-media"><img src="/assets/img/hero-alive.webp" alt="Kedarnath temple with snow-capped Himalayas behind" fetchpriority="high" width="640" height="427"></div>
     <div class="hero-glow"></div><div class="hero-grid"></div>
     <div class="container hero-inner">
       <span class="pill"><span class="dot"></span>Kolkata-based travel house · India &amp; worldwide</span>
       <h1>Travel <span class="grad">Beyond Imagination</span></h1>
-      <p class="hero-sub">Your dream holiday starts here. We craft personalised tours across India and beyond — from the majestic Himalayas and vibrant Northeast to sun-soaked international destinations.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary btn-lg" href="/booknow">Plan My Trip <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a class="btn btn-ghost btn-lg" href="/domestic">Explore Destinations</a>
-      </div>
+      <p class="hero-sub">Personalised domestic and international holidays, planned end to end by a team that knows the road — from Himalayan escapes to Southeast Asian beach breaks.</p>
+      <form class="holiday-search" data-holiday-search action="/booknow" method="get">
+    <div class="hs-tabs" role="tablist" aria-label="Choose a holiday type">
+      <button class="hs-tab" type="button" role="tab" aria-selected="true" aria-controls="holiday-search-fields" tabindex="0" data-holiday-tab data-scope="all">All Holidays</button><button class="hs-tab" type="button" role="tab" aria-selected="false" aria-controls="holiday-search-fields" tabindex="-1" data-holiday-tab data-scope="domestic">Domestic</button><button class="hs-tab" type="button" role="tab" aria-selected="false" aria-controls="holiday-search-fields" tabindex="-1" data-holiday-tab data-scope="international">International</button><button class="hs-tab" type="button" role="tab" aria-selected="false" aria-controls="holiday-search-fields" tabindex="-1" data-holiday-tab data-scope="honeymoon">Honeymoon</button><button class="hs-tab" type="button" role="tab" aria-selected="false" aria-controls="holiday-search-fields" tabindex="-1" data-holiday-tab data-scope="group">Group Tours</button>
+    </div>
+    <input type="hidden" name="theme" value="All Holidays">
+    <div class="hs-fields" id="holiday-search-fields" role="tabpanel" aria-label="Holiday details">
+      <label class="hs-field">
+        <span class="hs-label"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Destination</span>
+        <select name="destination" data-dest-select>
+          <option value="">Anywhere</option>
+          <option value="Himalayas" data-cat="domestic">Himalayas</option><option value="Northeast" data-cat="domestic">Northeast</option><option value="Royal North" data-cat="domestic">Royal North</option><option value="South India" data-cat="domestic">South India</option><option value="Coastal &amp; Islands" data-cat="domestic">Coastal &amp; Islands</option><option value="Hill Stations" data-cat="domestic">Hill Stations</option><option value="Nepal" data-cat="international">Nepal</option><option value="Thailand" data-cat="international">Thailand</option><option value="Singapore" data-cat="international">Singapore</option><option value="Vietnam" data-cat="international">Vietnam</option>
+        </select>
+      </label>
+      <label class="hs-field">
+        <span class="hs-label"><svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg> Trip type</span>
+        <select name="type">
+          <option value="">Any style</option>
+          <option value="Mountains">Mountains</option><option value="Heritage">Heritage</option><option value="Culture / Temples">Culture / Temples</option><option value="Beach">Beach</option><option value="City / Shopping">City / Shopping</option><option value="Culture / Heritage">Culture / Heritage</option>
+        </select>
+      </label>
+      <label class="hs-field">
+        <span class="hs-label"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> Duration</span>
+        <select name="duration">
+          <option value="">Any duration</option>
+          <option>3–4 nights</option>
+          <option>5–6 nights</option>
+          <option>7–9 nights</option>
+          <option>10+ nights</option>
+        </select>
+      </label>
+      <label class="hs-field">
+        <span class="hs-label"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg> Travellers</span>
+        <select name="travellers">
+          <option>1 traveller</option>
+          <option selected>2 travellers</option>
+          <option>3–5 travellers</option>
+          <option>6–10 travellers</option>
+          <option>10+ travellers</option>
+        </select>
+      </label>
+      <button class="btn btn-primary hs-submit" type="submit"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> Plan My Holiday</button>
+    </div>
+    <div class="hs-foot">
+      <p class="hs-note"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> No payment now. We reply on WhatsApp with a tailored itinerary and quote.</p>
+      <p class="hs-status" aria-live="polite"></p>
+    </div>
+  </form>
       <div class="hero-proof">
         <span><strong>26K+</strong> tours completed</span><span class="sep"></span>
         <span><strong>60+</strong> destinations curated</span><span class="sep"></span>
