@@ -113,6 +113,66 @@ const TRIPS = [
   },
 ];
 
+const THAILAND_PHOTOS = [
+  { src: "/assets/img/gallery/mathew-schwartz.jpg", alt: "Thai temple with a seated Buddha", caption: "Thai temple" },
+  { src: "/assets/img/gallery/georgios-domouchtsidis.jpg", alt: "Bangkok street scene at night", caption: "Bangkok streets" },
+  { src: "/assets/img/gallery/michelle-maria.webp", alt: "Pattaya attraction with a LOVE sign", caption: "Pattaya attractions" },
+];
+
+const TRIP_PHOTOS = {
+  himalayas: [
+    { src: "/assets/img/gallery/gulmarg.jpg", alt: "Gulmarg landscape in Kashmir", caption: "Gulmarg, Kashmir" },
+    { src: "/assets/img/ladakh.webp", alt: "Prayer flags beside a high-altitude lake in Ladakh", caption: "Ladakh's high-altitude lakes" },
+    { src: "/assets/img/hero-alive.webp", alt: "Himalayan temple against snow-capped peaks", caption: "Himalayan shrines" },
+  ],
+  northeast: [
+    { src: "/assets/img/trip-northeast.jpg", alt: "Train winding through green hills", caption: "Hill country" },
+    { src: "/assets/img/trip-hill-stations.jpg", alt: "Hill town at dusk", caption: "Hill-station views" },
+    { src: "/assets/img/trip-himalayas.jpg", alt: "Snow-capped Himalayan peaks", caption: "Himalayan peaks" },
+  ],
+  "royal-north": [
+    { src: "/assets/img/gallery/aditya-siva.jpg", alt: "Hawa Mahal in Jaipur", caption: "Hawa Mahal, Jaipur" },
+    { src: "/assets/img/gallery/srivatsan-balaji.webp", alt: "Ghats along the Ganges in Varanasi", caption: "Varanasi ghats" },
+    { src: "/assets/img/gallery/amber-fort.png", alt: "Amber Fort in Rajasthan", caption: "Amber Fort, Rajasthan" },
+  ],
+  "south-india": [
+    { src: "/assets/img/gallery/anil-jose.jpg", alt: "Traditional houseboat on the Kerala backwaters", caption: "Kerala backwaters" },
+    { src: "/assets/img/gallery/vivekananda-rock.jpg", alt: "Vivekananda Rock Memorial at Kanyakumari", caption: "Vivekananda Rock, Kanyakumari" },
+    { src: "/assets/img/gallery/charminar.jpg", alt: "Charminar in Hyderabad", caption: "Charminar, Hyderabad" },
+  ],
+  "coastal-islands": [
+    { src: "/assets/img/gallery/sumit-sourav.jpg", alt: "Beach huts on a Goan beach", caption: "Goa beach huts" },
+    { src: "/assets/img/gallery/mountain-lake.webp", alt: "Turquoise water along a wooded coastline", caption: "Coastal shoreline" },
+    { src: "/assets/img/trip-coastal.jpg", alt: "Goa beach and coastline", caption: "Goa coastline" },
+  ],
+  "hill-stations": [
+    { src: "/assets/img/trip-hill-stations.jpg", alt: "Hill town at dusk", caption: "Hill-station views" },
+    { src: "/assets/img/trip-northeast.jpg", alt: "Train winding through green hills", caption: "Hill railway" },
+    { src: "/assets/img/trip-himalayas.jpg", alt: "Snow-capped Himalayan peaks", caption: "Snow-capped peaks" },
+  ],
+  nepal: [
+    { src: "/assets/img/trip-nepal.webp", alt: "Kathmandu Durbar Square in Nepal", caption: "Kathmandu Durbar Square" },
+    { src: "/assets/img/trip-himalayas.jpg", alt: "Himalayan mountain panorama", caption: "Himalayan panorama" },
+  ],
+  "thailand-pattaya-bangkok-3n": THAILAND_PHOTOS,
+  "thailand-pattaya-bangkok-4n": THAILAND_PHOTOS,
+  singapore: [
+    { src: "/assets/img/gallery/coleen-rivas.webp", alt: "Gardens by the Bay in Singapore", caption: "Gardens by the Bay" },
+    { src: "/assets/img/gallery/chuttersnap.jpg", alt: "Singapore skyline at night", caption: "Singapore skyline" },
+    { src: "/assets/img/trip-singapore.webp", alt: "Singapore cityscape", caption: "Singapore cityscape" },
+  ],
+  "vietnam-hanoi-da-nang": [
+    { src: "/assets/img/gallery/james-cheung.jpg", alt: "Hoi An's lantern-lit streets in Vietnam", caption: "Hoi An" },
+    { src: "/assets/img/gallery/marina-lobato.jpg", alt: "Limestone karsts in Ha Long Bay", caption: "Ha Long Bay" },
+    { src: "/assets/img/trip-vietnam-danang.webp", alt: "Da Nang coastline in Vietnam", caption: "Da Nang coastline" },
+  ],
+  "vietnam-hanoi-ho-chi-minh": [
+    { src: "/assets/img/gallery/marina-lobato.jpg", alt: "Limestone karsts in Ha Long Bay", caption: "Ha Long Bay" },
+    { src: "/assets/img/trip-vietnam-hcm.webp", alt: "Ho Chi Minh City in Vietnam", caption: "Ho Chi Minh City" },
+    { src: "/assets/img/trip-vietnam-danang.webp", alt: "Vietnam coastline", caption: "Vietnam coastline" },
+  ],
+};
+
 const DOMESTIC = TRIPS.filter((t) => t.cat === "domestic");
 const INTERNATIONAL = TRIPS.filter((t) => t.cat === "international");
 
@@ -1449,6 +1509,7 @@ function bookPage() {
 
 function tripPage(t) {
   const related = TRIPS.filter((x) => x.cat === t.cat && x.slug !== t.slug).slice(0, 3);
+  const photos = TRIP_PHOTOS[t.slug] || [];
   const isIntl = t.cat === "international";
   const departure = t.dates === "On request" ? "On request" : t.dates;
   const overview = isIntl
@@ -1531,6 +1592,18 @@ function tripPage(t) {
         </div>
         ${t.sub ? `<p style="margin-top:16px">${t.sub}</p>` : ""}
       </section>
+
+      ${photos.length ? `<section class="detail-card" data-reveal>
+        <span class="eyebrow">Trip Gallery</span>
+        <h2>Scenes from this journey</h2>
+        <p>A visual preview of the places and experiences that shape this itinerary.</p>
+        <div class="trip-gallery">
+          ${photos.map((p) => `<figure class="trip-photo">
+            <img src="${p.src}" alt="${esc(p.alt)}" loading="lazy" width="640" height="480">
+            <figcaption>${esc(p.caption)}</figcaption>
+          </figure>`).join("")}
+        </div>
+      </section>` : ""}
 
       <section class="detail-card" data-reveal>
         <span class="eyebrow">What's Included</span>
