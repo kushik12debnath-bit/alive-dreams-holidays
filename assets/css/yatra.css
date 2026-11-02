@@ -125,7 +125,7 @@ p { color: inherit; }
   box-shadow: none;
 }
 .header-inner {
-  height: 66px;
+  height: 72px;
   padding: 0 16px 0 22px;
   background: #fff;
   border: 1px solid rgba(0, 0, 0, .06);
@@ -147,6 +147,8 @@ p { color: inherit; }
   -webkit-text-fill-color: var(--accent);
 }
 .brand-tag { border-left-color: var(--line); color: var(--muted-2); }
+.brand-logo { display: block; width: auto; height: 60px; object-fit: contain; }
+.footer-brand .brand-logo { height: 96px; }
 .nav-link { color: #4d4d4d; font-weight: 600; }
 .nav-link:hover, .nav-link[aria-current] { color: var(--accent); }
 .nav-link[aria-current]::after { background: var(--accent); }
@@ -871,7 +873,9 @@ p { color: inherit; }
   .hs-submit { min-width: 150px; }
 }
 @media (max-width: 960px) {
-  .header-inner { height: 62px; }
+  .header-inner { height: 66px; }
+  .brand-logo { height: 54px; }
+  .footer-brand .brand-logo { height: 88px; }
   .mobile-menu { top: 88px; }
   .yatra-hero { padding-top: 122px; }
   .hs-fields { grid-template-columns: 1fr 1fr; }
@@ -882,6 +886,9 @@ p { color: inherit; }
   .page-hero { padding-top: 120px; }
 }
 @media (max-width: 720px) {
+  .header-inner { height: 64px; }
+  .brand-logo { height: 50px; }
+  .footer-brand .brand-logo { height: 80px; }
   .yatra-hero { padding: 112px 0 40px; }
   .yatra-hero h1 { font-size: clamp(2.25rem, 10vw, 3.2rem); }
   .yatra-hero .hero-sub { font-size: .96rem; }
@@ -907,9 +914,10 @@ p { color: inherit; }
   .cta { border-radius: 16px; }
 }
 @media (max-width: 420px) {
-  .header-inner { padding: 0 10px 0 16px; }
+  .header-inner { height: 62px; padding: 0 10px 0 16px; }
   .header-actions .btn-sm { padding: 0 12px; font-size: .78rem; }
-  .brand-mark { width: 32px; height: 32px; }
+  .brand-logo { height: 48px; }
+  .footer-brand .brand-logo { height: 72px; }
   .hs-tabs { gap: 6px; }
   .hs-tab { padding: 7px 11px; font-size: .76rem; }
   .yatra-hero .offer-poster { height: 235px; }

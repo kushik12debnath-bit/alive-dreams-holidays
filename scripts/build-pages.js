@@ -258,9 +258,7 @@ const SPRITE = `<svg xmlns="http://www.w3.org/2000/svg" class="sr-only" aria-hid
 
 function brand() {
   return `<a class="brand" href="/" aria-label="Alive Dreams Holidays — home">
-    <span class="brand-mark" aria-hidden="true">${icon("compass")}</span>
-    <span class="brand-name">alive<em>dreams</em></span>
-    <span class="brand-tag" aria-hidden="true">Holidays<br>Pvt. Ltd.</span>
+    <img class="brand-logo" src="/assets/img/logo.jpg" alt="Alive Dreams Holidays Pvt. Ltd." width="189" height="225" decoding="async">
   </a>`;
 }
 
@@ -399,7 +397,8 @@ function shell({ title, description, canonical, current, content, schema, image,
   <meta name="twitter:image" content="${ogImage}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/pages.css">
