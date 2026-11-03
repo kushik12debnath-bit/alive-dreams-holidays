@@ -25,18 +25,10 @@ const TRIPS = [
     alt: "Snow-capped Himalayan landscape",
   },
   {
-    slug: "northeast", title: "Northeast", cardTitle: "Northeast", cat: "domestic", kicker: "India",
-    route: "Meghalaya • Assam • Arunachal • Nagaland",
-    dests: ["Meghalaya", "Assam", "Arunachal", "Nagaland"],
-    dates: "25 Dec – 1 Jan", duration: "7 Nights / 8 Days", days: 8, rating: "5.0",
-    type: "Mountains", price: null, image: "/assets/img/trip-northeast.jpg",
-    alt: "Train winding through lush green hills",
-  },
-  {
     slug: "royal-north", title: "Royal North", cardTitle: "Royal North", cat: "domestic", kicker: "India",
     route: "Rajasthan • Agra • Varanasi • Amritsar",
     dests: ["Rajasthan", "Agra", "Varanasi", "Amritsar"],
-    dates: "12 Jun – 20 Jun", duration: "8 Nights / 9 Days", days: 9, rating: "5.0",
+    dates: "12 Jun – 20 Jun", duration: "2 Nights / 3 Days", days: 3, rating: "5.0",
     type: "Heritage", price: null, image: "/assets/img/trip-royal-north.jpg",
     alt: "Heritage architecture of North India",
   },
@@ -44,7 +36,7 @@ const TRIPS = [
     slug: "south-india", title: "South India", cardTitle: "South India", cat: "domestic", kicker: "India",
     route: "Kerala • Coorg • Hampi • Tamil Nadu",
     dests: ["Kerala", "Coorg", "Hampi", "Tamil Nadu"],
-    dates: "25 Jun – 30 Jun", duration: "5 Nights / 6 Days", days: 6, rating: "5.0",
+    dates: "25 Jun – 30 Jun", duration: "2 Nights / 3 Days", days: 3, rating: "5.0",
     type: "Culture / Temples", price: null, image: "/assets/img/trip-south-india.jpg",
     alt: "Temple and landscape of South India",
   },
@@ -52,17 +44,9 @@ const TRIPS = [
     slug: "coastal-islands", title: "Coastal & Islands", cardTitle: "Coastal & Islands", cat: "domestic", kicker: "India",
     route: "Goa • Andamans • Lakshadweep • Konkan coast",
     dests: ["Goa", "Andamans", "Lakshadweep", "Konkan coast"],
-    dates: "10 Apr – 13 Apr", duration: "3 Nights / 4 Days", days: 4, rating: "5.0",
+    dates: "10 Apr – 13 Apr", duration: "2 Nights / 3 Days", days: 3, rating: "5.0",
     type: "Beach", price: null, image: "/assets/img/trip-coastal.jpg",
     alt: "Coastal beach and islands of India",
-  },
-  {
-    slug: "hill-stations", title: "Hill Stations", cardTitle: "Hill Stations", cat: "domestic", kicker: "India",
-    route: "Darjeeling • Shillong • Munnar • Ooty • Manali",
-    dests: ["Darjeeling", "Shillong", "Munnar", "Ooty", "Manali"],
-    dates: "20 Aug – 23 Aug", duration: "3 Nights / 4 Days", days: 4, rating: "4.5",
-    type: "Mountains", price: null, image: "/assets/img/trip-hill-stations.jpg",
-    alt: "Hill station in the mountains",
   },
   {
     slug: "nepal", title: "Nepal", cardTitle: "Nepal", cat: "international", kicker: "International",
@@ -70,14 +54,6 @@ const TRIPS = [
     dates: "On request", duration: "4 Nights / 5 Days", days: 5, rating: "5.0",
     type: "Mountains", price: 14800, image: "/assets/img/trip-nepal.webp",
     alt: "Mountain landscape in Nepal",
-  },
-  {
-    slug: "thailand-pattaya-bangkok-3n", title: "Thailand — Pattaya & Bangkok", cardTitle: "Thailand", cat: "international", kicker: "International",
-    route: "Pattaya • Bangkok", dests: ["Pattaya", "Bangkok"],
-    sub: "2 Nights Pattaya / 1 Night Bangkok",
-    dates: "On request", duration: "3 Nights / 4 Days", days: 4, rating: "4.5",
-    type: "Beach", price: 13200, image: "/assets/img/trip-thailand-3n.webp",
-    alt: "Tropical coastline in Thailand",
   },
   {
     slug: "thailand-pattaya-bangkok-4n", title: "Thailand — Pattaya & Bangkok", cardTitle: "Thailand", cat: "international", kicker: "International",
@@ -103,14 +79,6 @@ const TRIPS = [
     type: "Culture / Heritage", price: 37800, image: "/assets/img/trip-vietnam-danang.webp",
     alt: "Vietnam coastline and heritage",
   },
-  {
-    slug: "vietnam-hanoi-ho-chi-minh", title: "Vietnam — Hanoi & Ho Chi Minh", cardTitle: "Vietnam", cat: "international", kicker: "International",
-    route: "Hanoi • Ho Chi Minh", dests: ["Hanoi", "Ho Chi Minh"],
-    sub: "Hanoi – 3 nights and Ho Chi Minh – 2 nights",
-    dates: "On request", duration: "5 Nights / 6 Days", days: 6, rating: "4.5",
-    type: "Beach", price: 43700, image: "/assets/img/trip-vietnam-hcm.webp",
-    alt: "Vietnam city and beach escape",
-  },
 ];
 
 const THAILAND_PHOTOS = [
@@ -124,11 +92,6 @@ const TRIP_PHOTOS = {
     { src: "/assets/img/gallery/gulmarg.jpg", alt: "Gulmarg landscape in Kashmir", caption: "Gulmarg, Kashmir" },
     { src: "/assets/img/ladakh.webp", alt: "Prayer flags beside a high-altitude lake in Ladakh", caption: "Ladakh's high-altitude lakes" },
     { src: "/assets/img/hero-alive.webp", alt: "Himalayan temple against snow-capped peaks", caption: "Himalayan shrines" },
-  ],
-  northeast: [
-    { src: "/assets/img/trip-northeast.jpg", alt: "Train winding through green hills", caption: "Hill country" },
-    { src: "/assets/img/trip-hill-stations.jpg", alt: "Hill town at dusk", caption: "Hill-station views" },
-    { src: "/assets/img/trip-himalayas.jpg", alt: "Snow-capped Himalayan peaks", caption: "Himalayan peaks" },
   ],
   "royal-north": [
     { src: "/assets/img/gallery/aditya-siva.jpg", alt: "Hawa Mahal in Jaipur", caption: "Hawa Mahal, Jaipur" },
@@ -145,16 +108,10 @@ const TRIP_PHOTOS = {
     { src: "/assets/img/gallery/mountain-lake.webp", alt: "Turquoise water along a wooded coastline", caption: "Coastal shoreline" },
     { src: "/assets/img/trip-coastal.jpg", alt: "Goa beach and coastline", caption: "Goa coastline" },
   ],
-  "hill-stations": [
-    { src: "/assets/img/trip-hill-stations.jpg", alt: "Hill town at dusk", caption: "Hill-station views" },
-    { src: "/assets/img/trip-northeast.jpg", alt: "Train winding through green hills", caption: "Hill railway" },
-    { src: "/assets/img/trip-himalayas.jpg", alt: "Snow-capped Himalayan peaks", caption: "Snow-capped peaks" },
-  ],
   nepal: [
     { src: "/assets/img/trip-nepal.webp", alt: "Kathmandu Durbar Square in Nepal", caption: "Kathmandu Durbar Square" },
     { src: "/assets/img/trip-himalayas.jpg", alt: "Himalayan mountain panorama", caption: "Himalayan panorama" },
   ],
-  "thailand-pattaya-bangkok-3n": THAILAND_PHOTOS,
   "thailand-pattaya-bangkok-4n": THAILAND_PHOTOS,
   singapore: [
     { src: "/assets/img/gallery/coleen-rivas.webp", alt: "Gardens by the Bay in Singapore", caption: "Gardens by the Bay" },
@@ -165,11 +122,6 @@ const TRIP_PHOTOS = {
     { src: "/assets/img/gallery/james-cheung.jpg", alt: "Hoi An's lantern-lit streets in Vietnam", caption: "Hoi An" },
     { src: "/assets/img/gallery/marina-lobato.jpg", alt: "Limestone karsts in Ha Long Bay", caption: "Ha Long Bay" },
     { src: "/assets/img/trip-vietnam-danang.webp", alt: "Da Nang coastline in Vietnam", caption: "Da Nang coastline" },
-  ],
-  "vietnam-hanoi-ho-chi-minh": [
-    { src: "/assets/img/gallery/marina-lobato.jpg", alt: "Limestone karsts in Ha Long Bay", caption: "Ha Long Bay" },
-    { src: "/assets/img/trip-vietnam-hcm.webp", alt: "Ho Chi Minh City in Vietnam", caption: "Ho Chi Minh City" },
-    { src: "/assets/img/trip-vietnam-danang.webp", alt: "Vietnam coastline", caption: "Vietnam coastline" },
   ],
 };
 
@@ -347,11 +299,11 @@ function footer() {
       <h4>Top Destinations</h4>
       <ul>
         <li><a href="/trips/himalayas">Himalayas</a></li>
-        <li><a href="/trips/northeast">Northeast</a></li>
         <li><a href="/trips/royal-north">Royal North</a></li>
+        <li><a href="/trips/south-india">South India</a></li>
         <li><a href="/trips/coastal-islands">Coastal &amp; Islands</a></li>
-        <li><a href="/international">Southeast Asia</a></li>
-        <li><a href="/international">Europe</a></li>
+        <li><a href="/trips/nepal">Nepal</a></li>
+        <li><a href="/trips/thailand-pattaya-bangkok-4n">Thailand</a></li>
       </ul>
     </div>
     <div class="f-col f-contact">
@@ -469,7 +421,10 @@ function tripCard(t, opts) {
 
 function offerPoster(t) {
   const meta = t.route && t.route !== t.cardTitle ? t.route : "Ex-Kolkata departure";
-  return `<a class="offer-poster" href="/trips/${t.slug}" aria-label="View ${esc(t.cardTitle)} — ${esc(t.duration)}, from ${money(t.price)} per person">
+  const priceLabel = t.price
+    ? `from ${money(t.price)} per person`
+    : "price on request";
+  return `<a class="offer-poster" href="/trips/${t.slug}" aria-label="View ${esc(t.cardTitle)} — ${esc(t.duration)}, ${priceLabel}">
     <img src="${t.image}" alt="" loading="lazy" width="640" height="427">
     <span class="offer-shade" aria-hidden="true"></span>
     <span class="offer-body">
@@ -477,7 +432,9 @@ function offerPoster(t) {
       <span class="offer-title">${t.cardTitle}</span>
       <span class="offer-meta">${meta}</span>
       <span class="offer-foot">
-        <span class="offer-price"><small>From</small> <strong>${money(t.price)}</strong><small> / person</small></span>
+        ${t.price
+          ? `<span class="offer-price"><small>From</small> <strong>${money(t.price)}</strong><small> / person</small></span>`
+          : `<span class="offer-price"><strong>On request</strong></span>`}
         <span class="offer-go">View ${icon("arrow")}</span>
       </span>
     </span>
@@ -568,10 +525,10 @@ const STYLES = [
 ];
 
 const TRENDING = [
-  ["Bali", "/international"], ["Paris", "/international"], ["Thailand", "/trips/thailand-pattaya-bangkok-3n"],
+  ["Bali", "/international"], ["Paris", "/international"], ["Thailand", "/trips/thailand-pattaya-bangkok-4n"],
   ["Maldives", "/international"], ["Himachal Pradesh", "/domestic"], ["Goa", "/trips/coastal-islands"],
   ["Rajasthan", "/trips/royal-north"], ["Kerala", "/trips/south-india"], ["Andaman", "/trips/coastal-islands"],
-  ["Guwahati", "/trips/northeast"], ["Uttarakhand", "/domestic"],
+  ["Vietnam", "/trips/vietnam-hanoi-da-nang"], ["Uttarakhand", "/domestic"],
 ];
 
 const FAQS = [
@@ -651,15 +608,8 @@ function holidaySearch() {
 /* ---------- pages ---------- */
 function homePage() {
   const domesticCards = DOMESTIC.map((t) => tripCard(t)).join("\n");
-  const intlCards = INTERNATIONAL.slice(0, 3).map((t) => tripCard(t)).join("\n");
-  const offers = [
-    "nepal",
-    "thailand-pattaya-bangkok-3n",
-    "singapore",
-    "vietnam-hanoi-da-nang",
-    "thailand-pattaya-bangkok-4n",
-    "vietnam-hanoi-ho-chi-minh",
-  ].map((slug) => TRIPS.find((t) => t.slug === slug));
+  const intlCards = INTERNATIONAL.map((t) => tripCard(t)).join("\n");
+  const offers = TRIPS;
   const content = `
   <section class="hero yatra-hero" id="top">
     <div class="hero-media"><img src="/assets/img/hero-alive.webp" alt="Kedarnath temple with snow-capped Himalayas behind" fetchpriority="high" width="640" height="427"></div>
@@ -679,7 +629,7 @@ function homePage() {
         <div class="offers-head">
           <h2 class="eyebrow" id="offers-heading">Featured Offers</h2>
           <div class="offers-head-right">
-            <span class="offers-note">Per person, ex-Kolkata · flight cost and GST extra</span>
+            <span class="offers-note">International ex-Kolkata · domestic on request · flight &amp; GST extra</span>
             <button class="offers-toggle" type="button" data-offer-pause aria-pressed="false" aria-controls="hero-offers-track">Pause</button>
           </div>
         </div>
@@ -697,7 +647,7 @@ function homePage() {
       <div class="marquee-track">
         ${[1, 2].map(() => `<div class="marquee-group">
           <span class="m-item">Himalayas</span><span class="m-item caps">✦</span>
-          <span class="m-item">Northeast</span><span class="m-item caps">✦</span>
+          <span class="m-item">South India</span><span class="m-item caps">✦</span>
           <span class="m-item">Royal North</span><span class="m-item caps">✦</span>
           <span class="m-item">Coastal &amp; Islands</span><span class="m-item caps">✦</span>
           <span class="m-item">Southeast Asia</span><span class="m-item caps">✦</span>
@@ -751,7 +701,7 @@ function homePage() {
         note: "From snow-fed valleys to spice-scented coasts — we know every corner of the country, and the secrets between the pages of the brochure.",
         action: `<a class="link-arrow" href="/domestic">View all domestic trips ${icon("arrow")}</a>`,
       })}
-      <div class="cards-3">
+      <div class="cards-4">
         ${domesticCards}
       </div>
       <p class="note-box">Prices may vary. Contact us for exact quotes.</p>
@@ -766,7 +716,7 @@ function homePage() {
         note: "From Nepal and Thailand to Singapore and Vietnam — a selection of our current international packages, ex-Kolkata.",
         action: `<a class="link-arrow" href="/international">View all international trips ${icon("arrow")}</a>`,
       })}
-      <div class="cards-3">
+      <div class="cards-4">
         ${intlCards}
       </div>
       <p class="note-box">All prices are based on departures from Kolkata (CCU). Flight costs and GST are additional.</p>
@@ -850,7 +800,7 @@ function homePage() {
   `;
   return shell({
     title: "Alive Dreams Holidays — Travel Beyond Imagination",
-    description: "Kolkata-based tours and travel company crafting personalised domestic and international holidays. Himalayas, Northeast, Thailand, Singapore, Vietnam and more.",
+    description: "Kolkata-based tours and travel company crafting personalised domestic and international holidays. Himalayas, Royal North, South India, Thailand, Singapore, Vietnam and more.",
     canonical: "/",
     current: "home",
     content,
@@ -902,7 +852,7 @@ function aboutPage() {
         <span class="ic" style="display:grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid #ffd1d1;background:#fff0f0;color:#d60f0f">${icon("compass")}</span>
         <h2 style="margin-top:16px">Our Mission</h2>
         <p>Our mission at ALIVE Dreams Holidays is simple: to bring your travel dreams to life. We do this by combining deep destination knowledge with a genuine passion for exploration — designing each trip around what matters most to you.</p>
-        <p>From the rolling meadows of Northeast India and the royal forts of Rajasthan, to the golden beaches of Southeast Asia and the vibrant streets of Singapore, we handle every detail so you can focus on what travel is truly about — discovery, connection, and joy.</p>
+        <p>From the snow-capped Himalayas and the royal forts of Rajasthan to the backwaters of South India, the golden beaches of Southeast Asia, and the vibrant streets of Singapore, we handle every detail so you can focus on what travel is truly about — discovery, connection, and joy.</p>
       </article>
       <article class="detail-card" data-reveal>
         <span class="ic" style="display:grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid #ffd1d1;background:#fff0f0;color:#d60f0f">${icon("globe")}</span>
@@ -1049,11 +999,11 @@ function domesticPage() {
     <div class="container">
       ${sectionHead({
         eyebrow: "Curated Domestic Trips",
-        title: "Six ways to see India",
-        note: "Scheduled departures and tailor-made extensions across the Himalayas, the Northeast, royal Rajasthan, the south, the coast, and the hills.",
+        title: "Four ways to see India",
+        note: "Scheduled departures and tailor-made extensions across the Himalayas, royal Rajasthan, South India, and the coast.",
         action: `<a class="link-arrow" href="/booknow">Not sure which? Ask us ${icon("arrow")}</a>`,
       })}
-      <div class="cards-3">
+      <div class="cards-4">
         ${DOMESTIC.map((t) => tripCard(t)).join("")}
       </div>
       <p class="note-box">Prices may vary. Contact us for exact quotes.</p>
@@ -1073,11 +1023,11 @@ function domesticPage() {
     </div>
   </section>
 
-  ${CTA("Build Your India Itinerary", "Tell us your dates and the kind of trip you have in mind. We'll send a draft plan.", "/assets/img/trip-northeast.jpg")}
+  ${CTA("Build Your India Itinerary", "Tell us your dates and the kind of trip you have in mind. We'll send a draft plan.", "/assets/img/trip-south-india.jpg")}
   `;
   return shell({
     title: "Domestic Tours",
-    description: "Domestic tour packages across the Himalayas, Northeast, Royal North, South India, Coastal & Islands, and Hill Stations.",
+    description: "Domestic tour packages across the Himalayas, Royal North, South India, and Coastal & Islands.",
     canonical: "/domestic",
     current: "domestic",
     content,
@@ -1106,7 +1056,7 @@ function internationalPage() {
         note: "Nepal, Thailand, Singapore and Vietnam — with flights, stays, transfers and experiences arranged around your dates.",
         action: `<a class="link-arrow" href="/booknow">Request a custom quote ${icon("arrow")}</a>`,
       })}
-      <div class="cards-3">
+      <div class="cards-4">
         ${INTERNATIONAL.map((t) => tripCard(t)).join("")}
       </div>
       <p class="note-box">All prices are based on departures from Kolkata (CCU). Flight costs and GST are additional.</p>
@@ -1126,7 +1076,7 @@ function internationalPage() {
     </div>
   </section>
 
-  ${CTA("Your Next Stamp Starts Here", "Tell us where you'd like to go and we'll build the itinerary, flights, stays and transfers around you.", "/assets/img/trip-thailand-3n.webp")}
+  ${CTA("Your Next Stamp Starts Here", "Tell us where you'd like to go and we'll build the itinerary, flights, stays and transfers around you.", "/assets/img/trip-thailand-4n.webp")}
   `;
   return shell({
     title: "International Tours",
@@ -1511,13 +1461,14 @@ function tripPage(t) {
   const photos = TRIP_PHOTOS[t.slug] || [];
   const isIntl = t.cat === "international";
   const departure = t.dates === "On request" ? "On request" : t.dates;
+  const dateLabel = isIntl ? "Departure" : "Listed dates";
   const overview = isIntl
     ? `Our ${t.title} journey covers ${t.dests.join(", ")} across ${t.duration}.${t.sub ? " " + t.sub + "." : ""} Departure dates are on request, and the trip is rated ${t.rating} by travellers. Departures are ex-Kolkata (CCU), with flight cost and GST extra.`
-    : `Our ${t.title} journey brings together ${t.dests.join(", ")} across ${t.duration}. The scheduled departure runs ${t.dates}, and the trip is rated ${t.rating} by travellers.`;
+    : `Our ${t.title} journey brings together ${t.dests.join(", ")} across ${t.duration}. The official listing shows ${t.dates}, and the trip is rated ${t.rating} by travellers. Exact travel dates are confirmed on enquiry.`;
 
   const notes = isIntl
     ? `All prices are based on departures from Kolkata (CCU). Flight costs and GST are additional. Final inclusions are confirmed in your personalised quote.`
-    : `Prices may vary. Contact us for exact quotes. Final inclusions are confirmed in your personalised quote.`;
+    : `Prices may vary. Contact us for exact quotes. The official listing shows a ${t.dates} date window; final travel dates are confirmed on enquiry.`;
 
   const schema = {
     "@context": "https://schema.org",
@@ -1568,7 +1519,7 @@ function tripPage(t) {
   <div class="container">
     <div class="fact-bar" data-reveal>
       <div class="fact">${icon("clock")}<div><span>Duration</span><strong>${t.duration}</strong></div></div>
-      <div class="fact">${icon("calendar")}<div><span>Departure</span><strong>${departure}</strong></div></div>
+      <div class="fact">${icon("calendar")}<div><span>${dateLabel}</span><strong>${departure}</strong></div></div>
       <div class="fact">${icon("tag")}<div><span>Style</span><strong>${t.type}</strong></div></div>
       <div class="fact">${icon("star")}<div><span>Rating</span><strong>${t.rating} / 5.0</strong></div></div>
     </div>
