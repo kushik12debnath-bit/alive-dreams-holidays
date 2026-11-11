@@ -3,3 +3,5 @@ server.js
 node_modules
 scripts/
 .env*
+.tooling
+assets/css/yatra.css

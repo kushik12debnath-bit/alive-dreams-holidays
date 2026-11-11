@@ -1,0 +1,10 @@
+{
+  "name": "alive-dreams-holidays",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Premium static website for Alive Dreams Holidays, Kolkata",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}

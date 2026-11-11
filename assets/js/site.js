@@ -70,7 +70,10 @@
   if (dropBtn) {
     dropBtn.addEventListener("click", function (e) {
       e.stopPropagation();
-      setDrop(!drop.classList.contains("open"));
+      // Hover already previews the menu; a click should keep it open rather
+      // than immediately toggling it closed under the pointer.
+      if (drop.classList.contains("open") && !drop.matches(":hover")) setDrop(false);
+      else setDrop(true);
     });
     drop.addEventListener("mouseenter", function () { setDrop(true); });
     drop.addEventListener("mouseleave", function () { setDrop(false); });
@@ -301,7 +304,13 @@
         travellers: "Travellers"
       };
       Object.keys(labels).forEach(function (key) {
-        var value = (data.get(key) || "").toString().trim();
+        var field = hsForm.elements[key];
+        var value;
+        if (field && field.tagName === "SELECT" && field.value && field.selectedOptions && field.selectedOptions.length) {
+          value = field.selectedOptions[0].textContent.trim();
+        } else {
+          value = (data.get(key) || "").toString().trim();
+        }
         if (value) lines.push(labels[key] + ": " + value);
       });
       var url = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(lines.join("\n"));
@@ -355,7 +364,13 @@
         travellers: "Travellers", role: "Role", message: "Message"
       };
       Object.keys(labels).forEach(function (key) {
-        var value = (data.get(key) || "").toString().trim();
+        var field = form.elements[key];
+        var value;
+        if (field && field.tagName === "SELECT" && field.value && field.selectedOptions && field.selectedOptions.length) {
+          value = field.selectedOptions[0].textContent.trim();
+        } else {
+          value = (data.get(key) || "").toString().trim();
+        }
         if (value) lines.push(labels[key] + ": " + value);
       });
       var url = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(lines.join("\n"));

@@ -1,6 +1,13 @@
 /* Static site generator — Alive Dreams Holidays
    Builds multi-page HTML from the content published on alivedreams.co.in. */
 "use strict";
+
+// The premium site is now maintained as static HTML. This generator predates
+// that redesign and would overwrite it, so it is opt-in only.
+if (process.env.ALLOW_LEGACY_REBUILD !== "1") {
+  console.error("Legacy generator disabled. The premium pages are canonical; set ALLOW_LEGACY_REBUILD=1 only if you intend to overwrite them.");
+  process.exit(0);
+}
 const fs = require("fs");
 const path = require("path");
 
@@ -331,7 +338,7 @@ function shell({ title, description, canonical, current, content, schema, image,
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#D60F0F">
+  <meta name="theme-color" content="#0A0B09">
   <title>${esc(fullTitle)}</title>
   <meta name="description" content="${esc(description)}">
   ${robots ? `<meta name="robots" content="${robots}">` : ""}
@@ -351,11 +358,12 @@ function shell({ title, description, canonical, current, content, schema, image,
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" href="/assets/img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/pages.css">
-  <link rel="stylesheet" href="/assets/css/yatra.css">
+  <link rel="stylesheet" href="/assets/css/premium.css">
   <script src="/assets/js/site.js" defer></script>
+  <script src="/assets/js/premium.js" defer></script>
   ${schema ? `<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>` : ""}
 </head>
 <body>
